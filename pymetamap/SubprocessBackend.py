@@ -36,7 +36,7 @@ class SubprocessBackend(MetaMap):
                          prefer_multiple_concepts=False,
                          ignore_stop_phrases=False, compute_all_mappings=False,
                          mm_data_version=False, exclude_sources=[],
-                         restrict_to_sources=[], restrict_to_sts=[], exclude_sts=[]):
+                         restrict_to_sources=[], restrict_to_sts=[], exclude_sts=[], silent=False)  # added the silent flag.
         """ extract_concepts takes a list of sentences and ids(optional)
             then returns a list of Concept objects extracted via
             MetaMap.
@@ -152,6 +152,8 @@ class SubprocessBackend(MetaMap):
             if ids is not None or (file_format == 'sldiID' and
                     sentences is None):
                 command.append('--sldiID')
+            if silent:
+                command.append('--silent')   # Added the silend flag.
             else:
                 command.append('--sldi')
             command.append(input_file.name)
